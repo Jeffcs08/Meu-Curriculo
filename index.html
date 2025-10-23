@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jefferson Souza - Currículo</title>
+    <style>
+        /* Reset e configurações básicas */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #dc2626;
+            --light-color: #f8fafc;
+            --dark-color: #1e293b;
+            --text-color: #000000;
+            --text-light: #374151;
+            --bg-color: #ffffff;
+            --card-bg: #ffffff;
+            --border-color: #e5e7eb;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Container principal */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Cabeçalho e navegação */
+        header {
+            background-color: var(--secondary-color);
+            color: white;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #93c5fd;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #93c5fd;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            transition: 0.3s;
+        }
+
+        /* Seções gerais */
+        section {
+            padding: 100px 0 80px;
+        }
+
+        .bg-light {
+            background-color: var(--light-color);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--secondary-color);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        /* Container para as seções lado a lado */
+        .sections-side-by-side {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .section-column {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+        }
+
+        .section-column h2 {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-column h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        /* Timeline individual para cada coluna */
+        .timeline-simple {
+            position: relative;
+        }
+
+        .timeline-item-simple {
+            margin-bottom: 30px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .timeline-item-simple::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-color);
+            border-radius: 50%;
+        }
+
+        .timeline-content-simple {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content-simple:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--secondary-color);
+        }
+
+        .timeline-company {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .timeline-details p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+            line-height: 1.6;
+        }
+
+        .timeline-details ul {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .timeline-details li {
+            margin-bottom: 8px;
+            color: var(--text-light);
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .timeline-details li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        /* Sobre */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+
+        .about-text p {
+            margin-bottom: 15px;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Habilidades */
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-category {
+            background-color: var(--card-bg);
+            padding: 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+
+        .category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .category-header:hover {
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+
+        .category-header h3 {
+            font-size: 1.5rem;
+            margin: 0;
+            color: var(--secondary-color);
+        }
+
+        .category-icon {
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .skill-category.active .category-icon {
+            transform: rotate(90deg);
+        }
+
+        .skill-category.active .category-header {
+            border-bottom-color: var(--border-color);
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+
+        .category-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+            padding: 0 20px;
+        }
+
+        .skill-category.active .category-content {
+            max-height: 500px;
+            padding: 20px;
+        }
+
+        .skill-item {
+            margin-bottom: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+            transition: transform 0.2s ease;
+        }
+
+        .skill-item:hover {
+            transform: translateX(5px);
+        }
+
+        .skill-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .skill-name span {
+            color: var(--text-color);
+            font-weight: 500;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .skill-name span::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        /* Animação para os itens aparecerem sequencialmente */
+        .category-content .skill-item {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .skill-category.active .category-content .skill-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .skill-category.active .category-content .skill-item:nth-child(1) { transition-delay: 0.1s; }
+        .skill-category.active .category-content .skill-item:nth-child(2) { transition-delay: 0.2s; }
+        .skill-category.active .category-content .skill-item:nth-child(3) { transition-delay: 0.3s; }
+        .skill-category.active .category-content .skill-item:nth-child(4) { transition-delay: 0.4s; }
+        .skill-category.active .category-content .skill-item:nth-child(5) { transition-delay: 0.5s; }
+
+        /* Seção Objetivos */
+        .objectives-accordion {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .objective-item {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .objective-item:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+
+        .objective-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .objective-header:hover {
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+
+        .objective-header-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .objective-icon {
+            font-size: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        .objective-header h3 {
+            color: var(--secondary-color);
+            margin: 0;
+            font-size: 1.4rem;
+            font-weight: 600;
+        }
+
+        .objective-arrow {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* Estados ativos */
+        .objective-item.active {
+            border-color: var(--primary-color);
+        }
+
+        .objective-item.active .objective-header {
+            background-color: rgba(37, 99, 235, 0.1);
+            border-bottom-color: var(--border-color);
+        }
+
+        .objective-item.active .objective-arrow {
+            transform: rotate(90deg);
+        }
+
+        .objective-item.active .objective-icon {
+            transform: scale(1.1);
+        }
+
+        .objective-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+            padding: 0 30px;
+        }
+
+        .objective-item.active .objective-content {
+            max-height: 200px;
+            padding: 25px 30px;
+        }
+
+        .objective-content p {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin: 0;
+            font-size: 1.1rem;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .objective-item.active .objective-content p {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Contato */
+        .contact-container-centered {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .contact-items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 900px;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .contact-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 30px 25px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            min-height: 180px;
+            justify-content: center;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary-color), #1d4ed8);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover .contact-icon {
+            transform: scale(1.1);
+        }
+
+        .contact-text {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .contact-item h3 {
+            color: var(--secondary-color);
+            margin-bottom: 8px;
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+
+        .contact-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            font-size: 1rem;
+        }
+
+        .contact-item:hover .contact-link {
+            color: var(--primary-color);
+        }
+
+        /* Destaque especial para o WhatsApp */
+        .contact-item:first-child:hover .contact-icon {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+        }
+
+        .contact-item:first-child:hover {
+            border-color: #25D366;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 40px 0 20px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .footer-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .footer-name {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .footer-role {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 5px;
+            line-height: 1.4;
+        }
+
+        .footer-location {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-style: italic;
+        }
+
+        .footer-copyright {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 20px;
+        }
+
+        .footer-copyright p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin: 0;
+        }
+
+        /* Botão */
+        .btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #1d4ed8;
+        }
+
+        /* Accordion para Experiência & Formação */
+        .column-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 30px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border-bottom: 1px solid transparent;
+        }
+
+        .column-header:hover {
+            background-color: rgba(37, 99, 235, 0.05);
+        }
+
+        .column-header h2 {
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .column-arrow {
+            color: var(--primary-color);
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        /* Estados ativos */
+        .section-column.active {
+            border-color: var(--primary-color);
+        }
+
+        .section-column.active .column-header {
+            background-color: rgba(37, 99, 235, 0.1);
+            border-bottom-color: var(--border-color);
+        }
+
+        .section-column.active .column-arrow {
+            transform: rotate(90deg);
+        }
+
+        .column-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease, padding 0.3s ease;
+            padding: 0 30px;
+        }
+
+        .section-column.active .column-content {
+            max-height: 1000px;
+            padding: 25px 30px;
+        }
+
+        /* Animações para o conteúdo */
+        .column-content .timeline-content-simple {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+
+        .section-column.active .column-content .timeline-content-simple {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .sections-side-by-side {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .column-header {
+                padding: 20px 25px;
+            }
+            
+            .column-header h2 {
+                font-size: 1.6rem;
+            }
+            
+            .section-column.active .column-content {
+                padding: 20px 25px;
+            }
+            
+            .column-content {
+                padding: 0 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background-color: var(--secondary-color);
+                flex-direction: column;
+                padding: 20px;
+                text-align: center;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 10px 0;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-column {
+                padding: 20px;
+            }
+            
+            .column-header {
+                padding: 18px 20px;
+            }
+            
+            .column-header h2 {
+                font-size: 1.4rem;
+            }
+            
+            .section-column.active .column-content {
+                padding: 18px 20px;
+            }
+            
+            .column-content {
+                padding: 0 20px;
+            }
+            
+            .timeline-title {
+                font-size: 1.2rem;
+            }
+            
+            .timeline-details ul {
+                margin-left: 15px;
+            }
+            
+            .contact-items-grid {
+                grid-template-columns: 1fr;
+                max-width: 400px;
+                gap: 20px;
+            }
+            
+            .contact-item {
+                padding: 25px 20px;
+                min-height: 160px;
+            }
+            
+            .contact-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.3rem;
+                margin-bottom: 15px;
+            }
+            
+            .contact-item h3 {
+                font-size: 1.2rem;
+            }
+            
+            .contact-link {
+                font-size: 0.95rem;
+            }
+            
+            .objective-header {
+                padding: 20px;
+            }
+            
+            .objective-header-content {
+                gap: 15px;
+            }
+            
+            .objective-icon {
+                font-size: 1.8rem;
+            }
+            
+            .objective-header h3 {
+                font-size: 1.2rem;
+            }
+            
+            .objective-item.active .objective-content {
+                padding: 20px;
+            }
+            
+            .objective-content {
+                padding: 0 20px;
+            }
+            
+            footer {
+                padding: 30px 0 15px;
+            }
+            
+            .footer-content {
+                gap: 20px;
+            }
+            
+            .footer-name {
+                font-size: 1.3rem;
+            }
+            
+            .footer-role {
+                font-size: 1rem;
+            }
+            
+            .footer-location {
+                font-size: 0.95rem;
+            }
+            
+            .footer-copyright {
+                padding-top: 15px;
+            }
+            
+            .footer-copyright p {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .column-header {
+                padding: 15px;
+            }
+            
+            .column-header h2 {
+                font-size: 1.3rem;
+            }
+            
+            .section-column.active .column-content {
+                padding: 15px;
+            }
+            
+            .column-content {
+                padding: 0 15px;
+            }
+            
+            .timeline-title {
+                font-size: 1.1rem;
+            }
+            
+            .timeline-details ul {
+                margin-left: 12px;
+            }
+            
+            .timeline-details li {
+                padding-left: 12px;
+                font-size: 0.9rem;
+            }
+            
+            .contact-items-grid {
+                gap: 15px;
+            }
+            
+            .contact-item {
+                padding: 20px 15px;
+                min-height: 140px;
+            }
+            
+            .contact-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 1.2rem;
+                margin-bottom: 12px;
+            }
+            
+            .contact-item h3 {
+                font-size: 1.1rem;
+            }
+            
+            .contact-link {
+                font-size: 0.9rem;
+            }
+            
+            .objective-header {
+                padding: 15px;
+            }
+            
+            .objective-header-content {
+                gap: 12px;
+            }
+            
+            .objective-icon {
+                font-size: 1.6rem;
+            }
+            
+            .objective-header h3 {
+                font-size: 1.1rem;
+            }
+            
+            .objective-item.active .objective-content {
+                padding: 15px;
+            }
+            
+            .objective-content {
+                padding: 0 15px;
+            }
+            
+            .objective-content p {
+                font-size: 1rem;
+            }
+            
+            .footer-name {
+                font-size: 1.2rem;
+            }
+            
+            .footer-role {
+                font-size: 0.95rem;
+            }
+            
+            .footer-location {
+                font-size: 0.9rem;
+            }
+            
+            .footer-copyright p {
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Efeito de foco para acessibilidade */
+        .contact-item:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho e Navegação -->
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">J<span>S</span></a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#habilidades">Habilidades</a></li>
+                <li><a href="#experiencia-formacao">Experiência & Formação</a></li>
+                <li><a href="#objetivos">Objetivos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Seção Sobre -->
+    <section id="sobre">
+        <div class="container">
+            <div class="section-title">
+                <h2>Sobre Mim</h2>
+            </div>
+            <center><div class="about-content">
+                <div class="about-text">
+                    <h3>Olá, eu sou Jefferson Costa Souza</h3>
+                    <p>Tenho 20 anos e atualmente atuo como <strong>Controlador de Acesso na Gaoserv</strong> desde janeiro de 2024, onde desenvolvo habilidades essenciais em segurança, organização e atendimento ao público. Minha experiência no controle de entrada e saída de pessoas me proporcionou uma visão detalhada sobre procedimentos de segurança e gestão de ambientes controlados.</p>
+                    
+                    <p>Em 2025, dei um importante passo na minha transição de carreira iniciando a graduação em <strong>Análise e Desenvolvimento de Sistemas na Cruzeiro do Sul - Campus Santo Amaro</strong>, com previsão de conclusão em 2026. Estou entusiasmado com a oportunidade de aplicar minha disciplina e capacidade de organização, adquiridas na área de segurança, no universo da tecnologia.</p>
+                    
+                    <p>Busco minha primeira oportunidade na área de TI, onde possa começar a aplicar os conhecimentos que estou adquirindo na faculdade e desenvolver minha carreira como profissional de tecnologia.</p>
+                </div>
+            </div></center>
+        </div>
+    </section>
+
+    <!-- Seção Habilidades -->
+    <section id="habilidades" class="bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Minhas Habilidades</h2>
+            </div>
+            <div class="skills-container">
+                <!-- Categoria Controle de Acessos -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <h3>Controle de Acesso</h3>
+                        <span class="category-icon">▶</span>
+                    </div>
+                    <div class="category-content">
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Procedimentos de Segurança</span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Monitoramento</span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Controle de Visitantes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categoria Tecnologia da Informação -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <h3>Tecnologia da Informação</h3>
+                        <span class="category-icon">▶</span>
+                    </div>
+                    <div class="category-content">
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Lógica de Programação</span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>HTML/CSS</span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>JavaScript</span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Canva</span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Pacote Office</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categoria Competências Pessoais -->
+                <div class="skill-category">
+                    <div class="category-header">
+                        <h3>Competências Pessoais</h3>
+                        <span class="category-icon">▶</span>
+                    </div>
+                    <div class="category-content">
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Comunicação</span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Trabalho em Equipe</span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Resolução de Problemas</span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Organização</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Experiência e Formação lado a lado -->
+    <section id="experiencia-formacao">
+        <div class="container">
+            <div class="section-title">
+                <h2>Experiência & Formação</h2>
+            </div>
+            <div class="sections-side-by-side">
+                <!-- Coluna da Experiência -->
+                <div class="section-column">
+                    <div class="column-header">
+                        <h2>Experiência Profissional</h2>
+                        <span class="column-arrow">▶</span>
+                    </div>
+                    <div class="column-content">
+                        <div class="timeline-simple">
+                            <div class="timeline-item-simple">
+                                <div class="timeline-content-simple">
+                                    <div class="timeline-date">Janeiro 2024 - Atual</div>
+                                    <h3 class="timeline-title">Controlador de Acesso</h3>
+                                    <h4 class="timeline-company">Gaoserv</h4>
+                                    <div class="timeline-details">
+                                        <p>Responsável pelo controle de entrada e saída de pessoas e veículos, garantindo a segurança do ambiente corporativo.</p>
+                                        <ul>
+                                            <li>Controle rigoroso de acessos em ambiente corporativo</li>
+                                            <li>Atendimento ao público e orientação de visitantes</li>
+                                            <li>Elaboração de relatórios diários de ocorrências</li>
+                                            <li>Monitoramento de sistemas de segurança eletrônica</li>
+                                            <li>Interface com sistemas de controle de acesso digital</li>
+                                            <li>Verificação de documentação e credenciais</li>
+                                            <li>Gestão de fluxo de pessoas em horários de pico</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coluna da Formação -->
+                <div class="section-column">
+                    <div class="column-header">
+                        <h2>Formação Acadêmica</h2>
+                        <span class="column-arrow">▶</span>
+                    </div>
+                    <div class="column-content">
+                        <div class="timeline-simple">
+                            <div class="timeline-item-simple">
+                                <div class="timeline-content-simple">
+                                    <div class="timeline-date">2025 - 2026 (Previsão)</div>
+                                    <h3 class="timeline-title">Análise e Desenvolvimento de Sistemas</h3>
+                                    <h4 class="timeline-company">Cruzeiro do Sul - Campus Santo Amaro</h4>
+                                    <div class="timeline-details">
+                                        <p>Graduação tecnológica com foco em desenvolvimento de software, banco de dados, engenharia de software e gestão de projetos de TI.</p>
+                                        <ul>
+                                            <li>Linguagens de Programação: Java, Python, JavaScript</li>
+                                            <li>Banco de Dados: MySQL, PostgreSQL</li>
+                                            <li>Desenvolvimento Web: HTML5, CSS3, React</li>
+                                            <li>Metodologias Ágeis: Scrum, Kanban</li>
+                                            <li>Redes de Computadores e Segurança da Informação</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Objetivos em TI -->
+    <section id="objetivos">
+        <div class="container">
+            <div class="section-title">
+                <h2>Objetivos na Área de TI</h2>
+            </div>
+            <div class="objectives-accordion">
+                <!-- Card 1 - Transição de Carreira -->
+                <div class="objective-item">
+                    <div class="objective-header">
+                        <div class="objective-header-content">
+                            <div class="objective-icon">💼</div>
+                            <h3>Transição de Carreira</h3>
+                        </div>
+                        <span class="objective-arrow">▶</span>
+                    </div>
+                    <div class="objective-content">
+                        <p>Busco minha primeira oportunidade na área de TI como Desenvolvedor Júnior.</p>
+                    </div>
+                </div>
+
+                <!-- Card 2 - Desenvolvimento Profissional -->
+                <div class="objective-item">
+                    <div class="objective-header">
+                        <div class="objective-header-content">
+                            <div class="objective-icon">🚀</div>
+                            <h3>Desenvolvimento Profissional</h3>
+                        </div>
+                        <span class="objective-arrow">▶</span>
+                    </div>
+                    <div class="objective-content">
+                        <p>Aprimorar minhas habilidades em programação e participar de projetos desafiadores que contribuam para meu crescimento.</p>
+                    </div>
+                </div>
+
+                <!-- Card 3 - Especialização -->
+                <div class="objective-item">
+                    <div class="objective-header">
+                        <div class="objective-header-content">
+                            <div class="objective-icon">🎯</div>
+                            <h3>Especialização</h3>
+                        </div>
+                        <span class="objective-arrow">▶</span>
+                    </div>
+                    <div class="objective-content">
+                        <p>Me especializar em desenvolvimento full-stack e me tornar referência na criação de soluções tecnológicas inovadoras.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Contato -->
+    <section id="contato" class="bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Entre em Contato</h2>
+            </div>
+            <div class="contact-container-centered">
+                <div class="contact-items-grid">
+                    <div class="contact-item clickable" onclick="window.open('https://wa.me/5511918686311', '_blank')">
+                        <div class="contact-icon">📱</div>
+                        <div class="contact-text">
+                            <h3>Telefone / WhatsApp</h3>
+                            <p class="contact-link">(11) 91868-6311</p>
+                        </div>
+                    </div>
+                    <div class="contact-item clickable" onclick="window.open('https://www.linkedin.com/in/jefferson-souza-28106523a/', '_blank')">
+                        <div class="contact-icon">💼</div>
+                        <div class="contact-text">
+                            <h3>LinkedIn</h3>
+                            <p class="contact-link">linkedin.com/in/jefferson-souza</p>
+                        </div>
+                    </div>
+                    <div class="contact-item clickable" onclick="window.open('https://github.com/Jeffcs08?tab=repositories', '_blank')">
+                        <div class="contact-icon">🐙</div>
+                        <div class="contact-text">
+                            <h3>GitHub</h3>
+                            <p class="contact-link">github.com/Jeffcs08</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p class="footer-name">Jefferson Costa Souza</p>
+                    <p class="footer-role">Estudante de Análise e Desenvolvimento de Sistemas</p>
+                    <p class="footer-location">São Paulo, SP</p>
+                </div>
+                <div class="footer-copyright">
+                    <p>&copy; 2025 Jefferson Costa Souza. Todos os direitos reservados.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Menu hamburger para dispositivos móveis
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Fechar menu ao clicar em um link
+        const links = document.querySelectorAll('.nav-links a');
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        // Script para o accordion de habilidades
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoryHeaders = document.querySelectorAll('.category-header');
+            
+            categoryHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const category = this.parentElement;
+                    const isActive = category.classList.contains('active');
+                    
+                    // Fecha todas as outras categorias
+                    document.querySelectorAll('.skill-category').forEach(otherCategory => {
+                        if (otherCategory !== category) {
+                            otherCategory.classList.remove('active');
+                        }
+                    });
+                    
+                    // Alterna a categoria clicada
+                    if (!isActive) {
+                        category.classList.add('active');
+                    } else {
+                        category.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // Script para o accordion das colunas
+        document.addEventListener('DOMContentLoaded', function() {
+            const columnHeaders = document.querySelectorAll('.column-header');
+            
+            columnHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const column = this.parentElement;
+                    const isActive = column.classList.contains('active');
+                    
+                    // Alterna a coluna clicada
+                    if (!isActive) {
+                        column.classList.add('active');
+                    } else {
+                        column.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // Script para o accordion de objetivos
+        document.addEventListener('DOMContentLoaded', function() {
+            const objectiveHeaders = document.querySelectorAll('.objective-header');
+            
+            objectiveHeaders.forEach(header => {
+                header.addEventListener('click', function() {
+                    const objectiveItem = this.parentElement;
+                    const isActive = objectiveItem.classList.contains('active');
+                    
+                    // Fecha todos os outros itens
+                    document.querySelectorAll('.objective-item').forEach(otherItem => {
+                        if (otherItem !== objectiveItem) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Alterna o item clicado
+                    if (!isActive) {
+                        objectiveItem.classList.add('active');
+                    } else {
+                        objectiveItem.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // Smooth scroll para links internos
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Adicionar classe de scroll no header para efeito visual
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(30, 64, 175, 0.95)';
+                header.style.backdropFilter = 'blur(10px)';
+            } else {
+                header.style.background = 'var(--secondary-color)';
+                header.style.backdropFilter = 'none';
+            }
+        });
+
+        // Atualizar navegação ativa
+        function updateActiveNav() {
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+
+        // Chame a função no scroll
+        window.addEventListener('scroll', updateActiveNav);
+    </script>
+</body>
+</html>
