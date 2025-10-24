@@ -16,6 +16,41 @@ links.forEach(link => {
     });
 });
 
+// Controle da seção Sobre
+const sobreLink = document.getElementById('sobre-link');
+const sobreSection = document.getElementById('sobre');
+const closeSobre = document.getElementById('close-sobre');
+
+// Inicialmente oculta a seção Sobre
+sobreSection.classList.add('hidden-section');
+
+// Mostrar seção Sobre ao clicar no link
+sobreLink.addEventListener('click', (e) => {
+    e.preventDefault();
+    sobreSection.classList.remove('hidden-section');
+    sobreSection.classList.add('visible-section');
+    
+    // Scroll suave para a seção
+    sobreSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+    });
+});
+
+// Fechar seção Sobre
+closeSobre.addEventListener('click', () => {
+    sobreSection.classList.remove('visible-section');
+    sobreSection.classList.add('hidden-section');
+});
+
+// Fechar seção Sobre ao clicar fora do conteúdo
+sobreSection.addEventListener('click', (e) => {
+    if (e.target === sobreSection) {
+        sobreSection.classList.remove('visible-section');
+        sobreSection.classList.add('hidden-section');
+    }
+});
+
 // Script para o accordion de habilidades
 document.addEventListener('DOMContentLoaded', function() {
     const categoryHeaders = document.querySelectorAll('.category-header');
@@ -90,13 +125,16 @@ document.addEventListener('DOMContentLoaded', function() {
 // Smooth scroll para links internos
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
+        // Não aplicar para o link "Sobre" que tem funcionalidade especial
+        if (this.id !== 'sobre-link') {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
         }
     });
 });
@@ -139,3 +177,11 @@ function updateActiveNav() {
 
 // Chame a função no scroll
 window.addEventListener('scroll', updateActiveNav);
+
+// Tecla ESC para fechar a seção Sobre
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && sobreSection.classList.contains('visible-section')) {
+        sobreSection.classList.remove('visible-section');
+        sobreSection.classList.add('hidden-section');
+    }
+});

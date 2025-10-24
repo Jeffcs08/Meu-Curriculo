@@ -80,6 +80,7 @@ header {
     text-decoration: none;
     font-weight: 500;
     transition: color 0.3s;
+    cursor: pointer;
 }
 
 .nav-links a:hover {
@@ -112,6 +113,7 @@ section {
 .section-title {
     text-align: center;
     margin-bottom: 50px;
+    position: relative;
 }
 
 .section-title h2 {
@@ -131,6 +133,104 @@ section {
     width: 70px;
     height: 3px;
     background-color: var(--primary-color);
+}
+
+/* Seção Sobre (inicialmente oculta) */
+#sobre {
+    transition: all 0.5s ease-in-out;
+}
+
+#sobre.hidden-section {
+    display: none;
+}
+
+#sobre.visible-section {
+    display: block;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close-btn {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--secondary-color);
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background-color: var(--light-color);
+    transform: scale(1.1);
+}
+
+/* Sobre */
+.about-content {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.about-text {
+    flex: 1;
+}
+
+.about-text h3 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+}
+
+.about-text p {
+    margin-bottom: 15px;
+    color: var(--text-light);
+    line-height: 1.7;
+}
+
+.about-highlights {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid var(--border-color);
+}
+
+.highlight-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    background-color: var(--light-color);
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+}
+
+.highlight-item:hover {
+    transform: translateX(5px);
+}
+
+.highlight-icon {
+    font-size: 1.2rem;
 }
 
 /* Container para as seções lado a lado */
@@ -249,29 +349,6 @@ section {
     color: var(--primary-color);
 }
 
-/* Sobre */
-.about-content {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-}
-
-.about-text {
-    flex: 1;
-}
-
-.about-text h3 {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    color: var(--secondary-color);
-}
-
-.about-text p {
-    margin-bottom: 15px;
-    color: var(--text-light);
-    line-height: 1.7;
-}
-
 /* Habilidades */
 .skills-container {
     display: grid;
@@ -351,6 +428,13 @@ section {
     margin-bottom: 0;
 }
 
+.skill-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
 .skill-name span {
     color: var(--text-color);
     font-weight: 500;
@@ -363,6 +447,21 @@ section {
     position: absolute;
     left: 0;
     color: var(--primary-color);
+}
+
+.skill-level {
+    width: 100px;
+    height: 6px;
+    background-color: var(--border-color);
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.skill-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary-color), #1d4ed8);
+    border-radius: 3px;
+    transition: width 0.5s ease;
 }
 
 /* Animação para os itens aparecerem sequencialmente */
@@ -849,6 +948,14 @@ footer {
     
     .objective-content {
         padding: 0 20px;
+    }
+    
+    .about-highlights {
+        grid-template-columns: 1fr;
+    }
+    
+    .close-btn {
+        right: 10px;
     }
     
     footer {

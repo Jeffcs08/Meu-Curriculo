@@ -17,7 +17,7 @@
                 <span></span>
             </div>
             <ul class="nav-links" id="navLinks">
-                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#" id="sobre-link">Sobre</a></li>
                 <li><a href="#habilidades">Habilidades</a></li>
                 <li><a href="#experiencia-formacao">Experiência & Formação</a></li>
                 <li><a href="#objetivos">Objetivos</a></li>
@@ -26,22 +26,38 @@
         </div>
     </header>
 
-    <!-- Seção Sobre -->
-    <section id="sobre">
+    <!-- Seção Sobre (inicialmente oculta) -->
+    <section id="sobre" class="hidden-section">
         <div class="container">
             <div class="section-title">
                 <h2>Sobre Mim</h2>
+                <button class="close-btn" id="close-sobre">×</button>
             </div>
-            <center><div class="about-content">
+            <div class="about-content">
                 <div class="about-text">
-                    <h3>Olá, eu sou Jefferson Costa Souza</h3>
-                    <p>Tenho 20 anos e atualmente atuo como <strong>Controlador de Acesso na Gaoserv</strong> desde janeiro de 2024, onde desenvolvo habilidades essenciais em segurança, organização e atendimento ao público. Minha experiência no controle de entrada e saída de pessoas me proporcionou uma visão detalhada sobre procedimentos de segurança e gestão de ambientes controlados.</p>
+                    <h3>Jefferson Costa Souza, 20 anos</h3>
+                    <p>Atualmente atuo como <strong>Controlador de Acesso na Gaoserv</strong>, onde desenvolvi habilidades essenciais em segurança, organização e atendimento ao público. Minha experiência inclui controle rigoroso de acessos, monitoramento de sistemas de segurança e elaboração de relatórios.</p>
                     
-                    <p>Em 2025, dei um importante passo na minha transição de carreira iniciando a graduação em <strong>Análise e Desenvolvimento de Sistemas na Universidade Cruzeiro do Sul - Campus Santo Amaro</strong>, com previsão de conclusão em 2026. Estou entusiasmado com a oportunidade de aplicar minha disciplina e capacidade de organização, adquiridas na área de segurança, no universo da tecnologia.</p>
+                    <p>Em 2025, iniciei minha transição para a área de tecnologia com a graduação em <strong>Análise e Desenvolvimento de Sistemas na Universidade Cruzeiro do Sul</strong>, com previsão de conclusão em 2026. Estou empolgado em aplicar minha disciplina e capacidade de organização no universo da tecnologia.</p>
                     
-                    <p>Busco minha primeira oportunidade na área de TI, onde possa começar a aplicar os conhecimentos que estou adquirindo na faculdade e desenvolver minha carreira como profissional de tecnologia.</p>
+                    <p>Busco minha primeira oportunidade na área de TI como <strong>Desenvolvedor Júnior</strong>, onde possa contribuir com minha dedicação e aprender com profissionais experientes. Tenho conhecimentos em HTML, CSS, JavaScript e estou constantemente me aprimorando através de cursos e projetos práticos.</p>
+                    
+                    <div class="about-highlights">
+                        <div class="highlight-item">
+                            <span class="highlight-icon">🎯</span>
+                            <span>Foco em desenvolvimento full-stack</span>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-icon">🚀</span>
+                            <span>Busco primeira oportunidade em TI</span>
+                        </div>
+                        <div class="highlight-item">
+                            <span class="highlight-icon">💡</span>
+                            <span>Disposto a aprender e evoluir</span>
+                        </div>
+                    </div>
                 </div>
-            </div></center>
+            </div>
         </div>
     </section>
 
@@ -74,6 +90,11 @@
                                 <span>Controle de Visitantes</span>
                             </div>
                         </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Relatórios de Ocorrências</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -87,26 +108,41 @@
                         <div class="skill-item">
                             <div class="skill-name">
                                 <span>Lógica de Programação</span>
+                            <div class="skill-level">
+                                    <div class="skill-bar" style="width: 85%"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="skill-item">
                             <div class="skill-name">
                                 <span>HTML/CSS</span>
+                                <div class="skill-level">
+                                    <div class="skill-bar" style="width: 80%"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="skill-item">
                             <div class="skill-name">
                                 <span>JavaScript</span>
+                                <div class="skill-level">
+                                    <div class="skill-bar" style="width: 70%"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="skill-item">
                             <div class="skill-name">
-                                <span>Canva</span>
+                                <span>Git e GitHub</span>
+                                <div class="skill-level">
+                                    <div class="skill-bar" style="width: 65%"></div>
+                                </div>
                             </div>
                         </div>
                         <div class="skill-item">
                             <div class="skill-name">
-                                <span>Pacote Office</span>
+                                <span>Python</span>
+                                <div class="skill-level">
+                                    <div class="skill-bar" style="width: 60%"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -137,6 +173,11 @@
                         <div class="skill-item">
                             <div class="skill-name">
                                 <span>Organização</span>
+                            </div>
+                        </div>
+                        <div class="skill-item">
+                            <div class="skill-name">
+                                <span>Adaptabilidade</span>
                             </div>
                         </div>
                     </div>
@@ -208,6 +249,17 @@
                                     </div>
                                 </div>
                             </div>
+                            
+                            <div class="timeline-item-simple">
+                                <div class="timeline-content-simple">
+                                    <div class="timeline-date">2023</div>
+                                    <h3 class="timeline-title">Ensino Médio Completo</h3>
+                                    <h4 class="timeline-company">Escola Estadual Octalles Marcondes Ferreira</h4>
+                                    <div class="timeline-details">
+                                        <p>Conclusão do ensino médio com formação básica completa.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -232,7 +284,7 @@
                         <span class="objective-arrow">▶</span>
                     </div>
                     <div class="objective-content">
-                        <p>Busco minha primeira oportunidade na área de TI como Desenvolvedor Júnior.</p>
+                        <p>Busco minha primeira oportunidade na área de TI como Desenvolvedor Júnior, onde possa aplicar meus conhecimentos em programação e contribuir para projetos desafiadores.</p>
                     </div>
                 </div>
 
@@ -246,7 +298,7 @@
                         <span class="objective-arrow">▶</span>
                     </div>
                     <div class="objective-content">
-                        <p>Aprimorar minhas habilidades em programação e participar de projetos desafiadores que contribuam para meu crescimento.</p>
+                        <p>Aprimorar minhas habilidades em programação, participar de projetos desafiadores e aprender com profissionais experientes para crescer na carreira de tecnologia.</p>
                     </div>
                 </div>
 
@@ -260,7 +312,7 @@
                         <span class="objective-arrow">▶</span>
                     </div>
                     <div class="objective-content">
-                        <p>Me especializar em desenvolvimento full-stack e me tornar referência na criação de soluções tecnológicas inovadoras.</p>
+                        <p>Me especializar em desenvolvimento full-stack, com foco em JavaScript, React e Node.js, e me tornar referência na criação de soluções tecnológicas inovadoras.</p>
                     </div>
                 </div>
             </div>
