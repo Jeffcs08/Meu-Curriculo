@@ -51,7 +51,7 @@ sobreSection.addEventListener('click', (e) => {
     }
 });
 
-// Script para o accordion de habilidades
+// Script para o accordion de habilidades - INICIALMENTE FECHADAS
 document.addEventListener('DOMContentLoaded', function() {
     const categoryHeaders = document.querySelectorAll('.category-header');
     
@@ -143,7 +143,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 window.addEventListener('scroll', () => {
     const header = document.querySelector('header');
     if (window.scrollY > 100) {
-        header.style.background = 'rgba(30, 64, 175, 0.95)';
+        header.style.background = 'rgba(30, 41, 59, 0.95)';
         header.style.backdropFilter = 'blur(10px)';
     } else {
         header.style.background = 'var(--secondary-color)';
@@ -185,3 +185,92 @@ document.addEventListener('keydown', (e) => {
         sobreSection.classList.add('hidden-section');
     }
 });
+
+// Função para abrir email com opção de Gmail
+function abrirEmail() {
+    // Tenta abrir o Gmail diretamente
+    const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=jeffersonsouza.j30@gmail.com&su=Contato via Currículo&body=Olá Jefferson, vim através do seu currículo online.';
+    const gmailWindow = window.open(gmailUrl, '_blank');
+    
+    // Se não abrir o Gmail (usuário não logado ou bloqueador de popup), abre o cliente padrão
+    if (!gmailWindow || gmailWindow.closed || typeof gmailWindow.closed == 'undefined') {
+        window.open('mailto:jeffersonsouza.j30@gmail.com?subject=Contato via Currículo&body=Olá Jefferson, vim através do seu currículo online.');
+    }
+}
+
+// Script para o scroll da seção de objetivos
+document.addEventListener('DOMContentLoaded', function() {
+    const scrollContainer = document.querySelector('.scrollable-tech-stack');
+    const databaseSection = document.querySelector('.database-section');
+    const scrollReached = document.querySelector('.scroll-reached');
+    
+    if (scrollContainer && databaseSection) {
+        let hasReachedDatabase = false;
+        
+        // Observador para verificar quando a seção de banco de dados fica visível
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasReachedDatabase) {
+                    hasReachedDatabase = true;
+                    databaseSection.classList.add('in-view');
+                    
+                    // Mostra o indicador de chegada
+                    if (scrollReached) {
+                        scrollReached.style.display = 'block';
+                    }
+                    
+                    // Esconde o indicador de scroll
+                    scrollContainer.classList.add('scrolled');
+                }
+            });
+        }, {
+            threshold: 0.5,
+            root: scrollContainer
+        });
+        
+        observer.observe(databaseSection);
+        
+        // Evento de scroll para verificar posição
+        scrollContainer.addEventListener('scroll', function() {
+            const scrollPercentage = (scrollContainer.scrollTop / (scrollContainer.scrollHeight - scrollContainer.clientHeight)) * 100;
+            
+            // Mostra que o usuário está scrollando
+            if (scrollPercentage > 20) {
+                scrollContainer.classList.add('scrolling');
+            }
+            
+            // Esconde o indicador quando começa a scrollar
+            if (scrollPercentage > 10 && !hasReachedDatabase) {
+                const scrollIndicator = document.querySelector('.scroll-indicator');
+                if (scrollIndicator) {
+                    scrollIndicator.style.opacity = Math.max(0, 1 - (scrollPercentage / 30));
+                }
+            }
+        });
+        
+        // Foca no container quando o card é aberto
+        const objectiveHeader = document.querySelector('.objective-item:nth-child(2) .objective-header');
+        if (objectiveHeader) {
+            objectiveHeader.addEventListener('click', function() {
+                setTimeout(() => {
+                    if (scrollContainer) {
+                        scrollContainer.focus();
+                    }
+                }, 400);
+            });
+        }
+    }
+});
+
+// Função para scroll automático até o banco de dados (opcional)
+function scrollToDatabase() {
+    const databaseSection = document.querySelector('.database-section');
+    const scrollContainer = document.querySelector('.scrollable-tech-stack');
+    
+    if (databaseSection && scrollContainer) {
+        databaseSection.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'center'
+        });
+    }
+}
