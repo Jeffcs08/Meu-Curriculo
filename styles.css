@@ -987,11 +987,11 @@ footer {
     }
     
     .section-column {
-        padding: 15px;
+        padding: 13px;
     }
     
     .column-header {
-        padding: 12px 15px;
+        padding: 10px 13px;
     }
     
     .column-header h2 {
@@ -999,11 +999,11 @@ footer {
     }
     
     .section-column.active .column-content {
-        padding: 12px 15px;
+        padding: 10px 13px;
     }
     
     .column-content {
-        padding: 0 15px;
+        padding: 0 13px;
     }
     
     .timeline-title {
@@ -1011,26 +1011,26 @@ footer {
     }
     
     .timeline-details ul {
-        margin-left: 10px;
+        margin-left: 8px;
     }
     
     .contact-items-grid {
         grid-template-columns: 1fr;
-        max-width: 320px;
-        gap: 12px;
+        max-width: 300px;
+        gap: 10px;
     }
     
     .contact-item {
-        padding: 15px 12px;
-        min-height: 100px;
+        padding: 13px 10px;
+        min-height: 90px;
         flex-direction: row;
         text-align: left;
-        gap: 12px;
+        gap: 10px;
     }
     
     .contact-icon {
-        width: 35px;
-        height: 35px;
+        width: 33px;
+        height: 33px;
         font-size: 0.9rem;
         margin-bottom: 0;
         flex-shrink: 0;
@@ -1043,7 +1043,7 @@ footer {
     
     .contact-item h3 {
         font-size: 0.9rem;
-        margin-bottom: 3px;
+        margin-bottom: 2px;
     }
     
     .contact-link {
@@ -1051,11 +1051,11 @@ footer {
     }
     
     .objective-header {
-        padding: 15px;
+        padding: 13px;
     }
     
     .objective-header-content {
-        gap: 12px;
+        gap: 10px;
     }
     
     .objective-icon {
@@ -1067,11 +1067,11 @@ footer {
     }
     
     .objective-item.active .objective-content {
-        padding: 15px;
+        padding: 13px;
     }
     
     .objective-content {
-        padding: 0 15px;
+        padding: 0 13px;
     }
     
     .about-highlights {
@@ -1079,15 +1079,15 @@ footer {
     }
     
     .close-btn {
-        right: 8px;
+        right: 6px;
     }
     
     footer {
-        padding: 25px 0 12px;
+        padding: 23px 0 10px;
     }
     
     .footer-content {
-        gap: 15px;
+        gap: 13px;
     }
     
     .footer-name {
@@ -1103,7 +1103,7 @@ footer {
     }
     
     .footer-copyright {
-        padding-top: 12px;
+        padding-top: 10px;
     }
     
     .footer-copyright p {
@@ -1112,11 +1112,11 @@ footer {
     
     .tech-stack {
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 13px;
     }
     
     .scrollable-tech-stack {
-        max-height: 350px;
+        max-height: 330px;
     }
 }
 
