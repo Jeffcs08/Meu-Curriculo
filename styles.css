@@ -889,7 +889,7 @@ footer {
 /* ========== RESPONSIVIDADE ========== */
 
 /* Tablets */
-@media (max-width: 992px) {
+@media (max-width: 700px) {
     .sections-side-by-side {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -956,13 +956,13 @@ footer {
 }
 
 /* Dispositivos Móveis */
-@media (max-width: 768px) {
+@media (max-width: 700px) {
     .nav-links {
         display: none;
         position: absolute;
-        top: 60px;
+        top: 50px;
         left: 0;
-        width: 100%;
+        width: 90%;
         background-color: var(--secondary-color);
         flex-direction: column;
         padding: 15px;
@@ -1121,9 +1121,9 @@ footer {
 }
 
 /* Dispositivos Móveis Pequenos */
-@media (max-width: 480px) {
+@media (max-width: 400px) {
     .column-header {
-        padding: 10px 12px;
+        padding: 8px 10px;
     }
     
     .column-header h2 {
@@ -1131,7 +1131,7 @@ footer {
     }
     
     .section-column.active .column-content {
-        padding: 10px 12px;
+        padding: 8px 10px;
     }
     
     .column-content {
@@ -1156,7 +1156,7 @@ footer {
     }
     
     .contact-item {
-        padding: 12px 10px;
+        padding: 10px 8px;
         min-height: 90px;
         gap: 10px;
     }
@@ -1278,13 +1278,13 @@ a:focus, button:focus, .contact-item:focus {
 }
 
 
-@media (max-width: 480px) {
+@media (max-width: 400px) {
     .compact-grid {
         grid-template-columns: 1fr;
-        gap: 6px;
+        gap: 5px;
     }
     
     .tech-column {
-        padding: 6px;
+        padding: 5px;
     }
 }
