@@ -1,26 +1,56 @@
-// Menu hamburger para dispositivos móveis
-const hamburger = document.getElementById('hamburger');
-const navLinks = document.getElementById('navLinks');
+// Função auxiliar para verificar se elementos existem
+function safeQuerySelector(selector) {
+    const element = document.querySelector(selector);
+    if (!element) {
+        console.warn(`Elemento não encontrado: ${selector}`);
+    }
+    return element;
+}
 
-hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    hamburger.classList.toggle('active');
-    hamburger.setAttribute('aria-expanded', hamburger.classList.contains('active'));
-});
+// Debounce otimizado para performance
+function debounce(func, wait, immediate) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            timeout = null;
+            if (!immediate) func(...args);
+        };
+        const callNow = immediate && !timeout;
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+        if (callNow) func(...args);
+    };
+}
+
+// Menu hamburger para dispositivos móveis
+const hamburger = safeQuerySelector('#hamburger');
+const navLinks = safeQuerySelector('#navLinks');
+
+if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        hamburger.classList.toggle('active');
+        hamburger.setAttribute('aria-expanded', hamburger.classList.contains('active'));
+    });
+}
 
 // Fechar menu ao clicar em um link
 const links = document.querySelectorAll('.nav-links a');
 links.forEach(link => {
     link.addEventListener('click', () => {
-        navLinks.classList.remove('active');
-        hamburger.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
+        if (navLinks) navLinks.classList.remove('active');
+        if (hamburger) {
+            hamburger.classList.remove('active');
+            hamburger.setAttribute('aria-expanded', 'false');
+        }
     });
 });
 
 // Fechar menu ao clicar fora
 document.addEventListener('click', (e) => {
-    if (!e.target.closest('.nav-container') && navLinks.classList.contains('active')) {
+    if (navLinks && hamburger && 
+        !e.target.closest('.nav-container') && 
+        navLinks.classList.contains('active')) {
         navLinks.classList.remove('active');
         hamburger.classList.remove('active');
         hamburger.setAttribute('aria-expanded', 'false');
@@ -101,7 +131,6 @@ document.addEventListener('DOMContentLoaded', function() {
 // Smooth scroll para links internos
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
-        // Não aplicar para o link "Sobre" que tem funcionalidade especial
         if (this.getAttribute('href') !== '#') {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
@@ -115,28 +144,17 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Debounce para eventos de scroll
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Adicionar classe de scroll no header para efeito visual
+// Efeito de scroll no header
 window.addEventListener('scroll', debounce(() => {
-    const header = document.querySelector('header');
-    if (window.scrollY > 100) {
-        header.style.background = 'rgba(30, 41, 59, 0.95)';
-        header.style.backdropFilter = 'blur(10px)';
-    } else {
-        header.style.background = 'var(--secondary-color)';
-        header.style.backdropFilter = 'none';
+    const header = safeQuerySelector('header');
+    if (header) {
+        if (window.scrollY > 50) {
+            header.style.background = 'rgba(30, 41, 59, 0.98)';
+            header.style.backdropFilter = 'blur(10px)';
+        } else {
+            header.style.background = 'var(--secondary-color)';
+            header.style.backdropFilter = 'none';
+        }
     }
 }, 10));
 
@@ -151,7 +169,7 @@ function updateActiveNav() {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
         
-        if (scrollY >= (sectionTop - 200)) {
+        if (scrollY >= (sectionTop - 150)) {
             current = section.getAttribute('id');
         }
     });
@@ -169,11 +187,9 @@ window.addEventListener('scroll', debounce(updateActiveNav, 10));
 
 // Função para abrir email com opção de Gmail
 function abrirEmail() {
-    // Tenta abrir o Gmail diretamente
     const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=jeffersonsouza.j30@gmail.com&su=Contato via Currículo&body=Olá Jefferson, vim através do seu currículo online.';
     const gmailWindow = window.open(gmailUrl, '_blank');
     
-    // Se não abrir o Gmail (usuário não logado ou bloqueador de popup), abre o cliente padrão
     if (!gmailWindow || gmailWindow.closed || typeof gmailWindow.closed == 'undefined') {
         window.open('mailto:jeffersonsouza.j30@gmail.com?subject=Contato via Currículo&body=Olá Jefferson, vim através do seu currículo online.');
     }
@@ -181,9 +197,9 @@ function abrirEmail() {
 
 // Script para o scroll da seção de objetivos
 document.addEventListener('DOMContentLoaded', function() {
-    const scrollContainer = document.querySelector('.scrollable-tech-stack');
-    const databaseSection = document.querySelector('.database-section');
-    const scrollReached = document.querySelector('.scroll-reached');
+    const scrollContainer = safeQuerySelector('.scrollable-tech-stack');
+    const databaseSection = safeQuerySelector('.database-section');
+    const scrollReached = safeQuerySelector('.scroll-reached');
     
     if (scrollContainer && databaseSection) {
         let hasReachedDatabase = false;
@@ -205,7 +221,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         }, {
-            threshold: 0.5,
+            threshold: 0.3,
             root: scrollContainer
         });
         
@@ -219,24 +235,14 @@ document.addEventListener('DOMContentLoaded', function() {
             if (scrollPercentage > 20) {
                 scrollContainer.classList.add('scrolling');
             }
-            
-            // Esconde o indicador quando começa a scrollar
-            if (scrollPercentage > 10 && !hasReachedDatabase) {
-                const scrollIndicator = document.querySelector('.scroll-indicator');
-                if (scrollIndicator) {
-                    scrollIndicator.style.opacity = Math.max(0, 1 - (scrollPercentage / 30));
-                }
-            }
         });
         
         // Foca no container quando o card é aberto
         const objectiveHeader = document.querySelector('.objective-item:nth-child(2) .objective-header');
-        if (objectiveHeader) {
+        if (objectiveHeader && scrollContainer) {
             objectiveHeader.addEventListener('click', function() {
                 setTimeout(() => {
-                    if (scrollContainer) {
-                        scrollContainer.focus();
-                    }
+                    scrollContainer.focus();
                 }, 400);
             });
         }

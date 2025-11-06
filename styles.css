@@ -21,6 +21,7 @@
 
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 80px;
 }
 
 body {
@@ -138,7 +139,7 @@ header {
 
 /* Seções gerais */
 section {
-    padding: 100px 0 60px;
+    padding: 120px 0 60px;
 }
 
 .bg-light {
@@ -174,7 +175,6 @@ section {
 #sobre {
     transition: all 0.5s ease-in-out;
 }
-
 
 /* Sobre */
 .about-content {
@@ -227,7 +227,7 @@ section {
     font-size: 1.1rem;
 }
 
-/* Container para as seções lado a lado - MENOR */
+/* Container para as seções lado a lado */
 .sections-side-by-side {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -264,7 +264,7 @@ section {
     background-color: var(--primary-color);
 }
 
-/* Timeline individual para cada coluna - MENOR */
+/* Timeline individual para cada coluna */
 .timeline-simple {
     position: relative;
 }
@@ -662,32 +662,6 @@ footer {
     margin: 0 auto;
 }
 
-.footer-info {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-}
-
-.footer-name {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 3px;
-    color: var(--text-color);
-}
-
-.footer-role {
-    font-size: 0.95rem;
-    color: var(--text-light);
-    margin-bottom: 3px;
-    line-height: 1.3;
-}
-
-.footer-location {
-    font-size: 0.9rem;
-    color: var(--text-light);
-    font-style: italic;
-}
-
 .footer-copyright {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 15px;
@@ -852,6 +826,40 @@ footer {
     opacity: 1;
 }
 
+/* Layout compacto em grid */
+.compact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.tech-column {
+    background: rgba(59, 130, 246, 0.1);
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.tech-column strong {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.tech-column ul {
+    padding-left: 12px;
+    margin: 0;
+}
+
+.tech-column li {
+    font-size: 0.7rem;
+    line-height: 1.3;
+    margin-bottom: 3px;
+}
+
 /* Indicador de Chegada */
 .scroll-reached {
     text-align: center;
@@ -879,17 +887,36 @@ footer {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Efeito quando a seção fica visível */
-.scrollable-tech-stack.scrolled .scroll-indicator {
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
+/* Efeito de foco para acessibilidade */
+a:focus, 
+button:focus, 
+.contact-item:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 3px;
+}
+
+/* Melhorar performance de animações */
+* {
+    transform: translateZ(0);
+}
+
+/* Preferência de movimento reduzido */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    html {
+        scroll-behavior: auto;
+    }
 }
 
 /* ========== RESPONSIVIDADE ========== */
 
 /* Tablets */
-@media (max-width: 700px) {
+@media (max-width: 992px) {
     .sections-side-by-side {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -941,9 +968,9 @@ footer {
         font-size: 0.75rem;
     }
     
-    .tech-stack {
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
+    .compact-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
     }
     
     .tech-category.database-section {
@@ -956,18 +983,27 @@ footer {
 }
 
 /* Dispositivos Móveis */
-@media (max-width: 700px) {
+@media (max-width: 768px) {
+    section {
+        padding: 100px 0 40px;
+    }
+    
+    #sobre {
+        padding: 100px 0 40px;
+    }
+    
     .nav-links {
         display: none;
         position: absolute;
-        top: 50px;
+        top: 60px;
         left: 0;
-        width: 90%;
+        width: 100%;
         background-color: var(--secondary-color);
         flex-direction: column;
         padding: 15px;
         text-align: center;
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        z-index: 1001;
     }
     
     .nav-links.active {
@@ -987,11 +1023,11 @@ footer {
     }
     
     .section-column {
-        padding: 13px;
+        padding: 15px;
     }
     
     .column-header {
-        padding: 10px 13px;
+        padding: 12px 15px;
     }
     
     .column-header h2 {
@@ -999,11 +1035,11 @@ footer {
     }
     
     .section-column.active .column-content {
-        padding: 10px 13px;
+        padding: 12px 15px;
     }
     
     .column-content {
-        padding: 0 13px;
+        padding: 0 15px;
     }
     
     .timeline-title {
@@ -1011,26 +1047,26 @@ footer {
     }
     
     .timeline-details ul {
-        margin-left: 8px;
+        margin-left: 10px;
     }
     
     .contact-items-grid {
         grid-template-columns: 1fr;
-        max-width: 300px;
-        gap: 10px;
+        max-width: 320px;
+        gap: 12px;
     }
     
     .contact-item {
-        padding: 13px 10px;
-        min-height: 90px;
+        padding: 15px 12px;
+        min-height: 100px;
         flex-direction: row;
         text-align: left;
-        gap: 10px;
+        gap: 12px;
     }
     
     .contact-icon {
-        width: 33px;
-        height: 33px;
+        width: 35px;
+        height: 35px;
         font-size: 0.9rem;
         margin-bottom: 0;
         flex-shrink: 0;
@@ -1043,7 +1079,7 @@ footer {
     
     .contact-item h3 {
         font-size: 0.9rem;
-        margin-bottom: 2px;
+        margin-bottom: 3px;
     }
     
     .contact-link {
@@ -1051,11 +1087,11 @@ footer {
     }
     
     .objective-header {
-        padding: 13px;
+        padding: 15px;
     }
     
     .objective-header-content {
-        gap: 10px;
+        gap: 12px;
     }
     
     .objective-icon {
@@ -1067,63 +1103,51 @@ footer {
     }
     
     .objective-item.active .objective-content {
-        padding: 13px;
+        padding: 15px;
     }
     
     .objective-content {
-        padding: 0 13px;
+        padding: 0 15px;
     }
     
     .about-highlights {
         grid-template-columns: 1fr;
     }
     
-    .close-btn {
-        right: 6px;
-    }
-    
     footer {
-        padding: 23px 0 10px;
+        padding: 25px 0 12px;
     }
     
     .footer-content {
-        gap: 13px;
-    }
-    
-    .footer-name {
-        font-size: 1.1rem;
-    }
-    
-    .footer-role {
-        font-size: 0.9rem;
-    }
-    
-    .footer-location {
-        font-size: 0.85rem;
+        gap: 15px;
     }
     
     .footer-copyright {
-        padding-top: 10px;
-    }
-    
-    .footer-copyright p {
-        font-size: 0.75rem;
+        padding-top: 12px;
     }
     
     .tech-stack {
         grid-template-columns: 1fr;
-        gap: 13px;
+        gap: 15px;
     }
     
     .scrollable-tech-stack {
-        max-height: 330px;
+        max-height: 350px;
     }
 }
 
 /* Dispositivos Móveis Pequenos */
-@media (max-width: 400px) {
+@media (max-width: 480px) {
+    section {
+        padding: 90px 0 30px;
+    }
+    
+    #sobre {
+        padding: 90px 0 30px;
+    }
+    
     .column-header {
-        padding: 8px 10px;
+        padding: 10px 12px;
     }
     
     .column-header h2 {
@@ -1131,7 +1155,7 @@ footer {
     }
     
     .section-column.active .column-content {
-        padding: 8px 10px;
+        padding: 10px 12px;
     }
     
     .column-content {
@@ -1156,7 +1180,7 @@ footer {
     }
     
     .contact-item {
-        padding: 10px 8px;
+        padding: 12px 10px;
         min-height: 90px;
         gap: 10px;
     }
@@ -1203,18 +1227,6 @@ footer {
         font-size: 0.85rem;
     }
     
-    .footer-name {
-        font-size: 1rem;
-    }
-    
-    .footer-role {
-        font-size: 0.85rem;
-    }
-    
-    .footer-location {
-        font-size: 0.8rem;
-    }
-    
     .footer-copyright p {
         font-size: 0.7rem;
     }
@@ -1231,60 +1243,13 @@ footer {
     .tech-category li {
         font-size: 0.8rem;
     }
-}
-
-/* Efeito de foco para acessibilidade */
-a:focus, button:focus, .contact-item:focus {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
-}
-
-/* Melhorar performance de animações */
-* {
-    transform: translateZ(0);
-}
-/* Layout compacto em grid */
-.compact-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    margin-top: 8px;
-}
-
-.tech-column {
-    background: rgba(59, 130, 246, 0.1);
-    padding: 8px;
-    border-radius: 6px;
-    border: 1px solid rgba(59, 130, 246, 0.2);
-}
-
-.tech-column strong {
-    display: block;
-    font-size: 0.7rem;
-    color: var(--primary-color);
-    margin-bottom: 5px;
-    text-align: center;
-}
-
-.tech-column ul {
-    padding-left: 10px;
-    margin: 0;
-}
-
-.tech-column li {
-    font-size: 0.65rem;
-    line-height: 1.2;
-    margin-bottom: 2px;
-}
-
-
-@media (max-width: 400px) {
+    
     .compact-grid {
         grid-template-columns: 1fr;
-        gap: 5px;
+        gap: 8px;
     }
     
     .tech-column {
-        padding: 5px;
+        padding: 8px;
     }
 }
