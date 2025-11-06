@@ -1,10 +1,12 @@
 // Função auxiliar para verificar se elementos existem
-function safeQuerySelector(selector) {
-    const element = document.querySelector(selector);
-    if (!element) {
-        console.warn(`Elemento não encontrado: ${selector}`);
+function safeQuerySelector(selector, fallback = null) {
+    try {
+        const element = document.querySelector(selector);
+        return element || fallback;
+    } catch (error) {
+        console.warn(`Erro ao buscar ${selector}:`, error);
+        return fallback;
     }
-    return element;
 }
 
 // Debounce otimizado para performance
@@ -22,132 +24,139 @@ function debounce(func, wait, immediate) {
     };
 }
 
-// Menu hamburger para dispositivos móveis
-const hamburger = safeQuerySelector('#hamburger');
-const navLinks = safeQuerySelector('#navLinks');
+// Classe Accordion reutilizável
+class Accordion {
+    constructor(containerSelector) {
+        this.containers = document.querySelectorAll(containerSelector);
+        this.init();
+    }
+    
+    init() {
+        this.containers.forEach(container => {
+            const header = container.querySelector('.category-header, .column-header, .objective-header');
+            const content = container.querySelector('.category-content, .column-content, .objective-content');
+            
+            if (!header || !content) return;
+            
+            // Adicionar atributos ARIA
+            header.setAttribute('aria-expanded', 'false');
+            header.setAttribute('role', 'button');
+            content.setAttribute('aria-hidden', 'true');
+            
+            header.addEventListener('click', () => this.toggle(container));
+            header.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.toggle(container);
+                }
+            });
+        });
+    }
+    
+    toggle(container) {
+        const isOpening = !container.classList.contains('active');
+        const header = container.querySelector('.category-header, .column-header, .objective-header');
+        const content = container.querySelector('.category-content, .column-content, .objective-content');
+        
+        // Fechar outros no mesmo grupo
+        if (isOpening) {
+            this.containers.forEach(other => {
+                if (other !== container && other.classList.contains('active')) {
+                    other.classList.remove('active');
+                    const otherHeader = other.querySelector('.category-header, .column-header, .objective-header');
+                    const otherContent = other.querySelector('.category-content, .column-content, .objective-content');
+                    if (otherHeader) otherHeader.setAttribute('aria-expanded', 'false');
+                    if (otherContent) otherContent.setAttribute('aria-hidden', 'true');
+                }
+            });
+        }
+        
+        container.classList.toggle('active');
+        
+        // Atualizar atributos ARIA
+        if (header) header.setAttribute('aria-expanded', isOpening.toString());
+        if (content) content.setAttribute('aria-hidden', (!isOpening).toString());
+        
+        // Disparar evento personalizado
+        container.dispatchEvent(new CustomEvent('accordionToggle', {
+            detail: { isOpen: isOpening }
+        }));
+    }
+}
 
-if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
+// Menu hamburger para dispositivos móveis
+function initMobileMenu() {
+    const hamburger = safeQuerySelector('#hamburger');
+    const navLinks = safeQuerySelector('#navLinks');
+    
+    if (!hamburger || !navLinks) return;
+    
+    const toggleMenu = () => {
+        const isExpanded = hamburger.getAttribute('aria-expanded') === 'true';
+        hamburger.setAttribute('aria-expanded', (!isExpanded).toString());
         navLinks.classList.toggle('active');
         hamburger.classList.toggle('active');
-        hamburger.setAttribute('aria-expanded', hamburger.classList.contains('active'));
+        
+        // Prevenir scroll do body quando menu aberto
+        document.body.style.overflow = isExpanded ? '' : 'hidden';
+    };
+    
+    hamburger.addEventListener('click', toggleMenu);
+    
+    // Fechar menu com Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+            toggleMenu();
+        }
+    });
+    
+    // Fechar menu ao clicar em um link
+    const links = document.querySelectorAll('.nav-links a');
+    links.forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                toggleMenu();
+            }
+        });
+    });
+    
+    // Fechar menu ao clicar fora
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.nav-container') && navLinks.classList.contains('active')) {
+            toggleMenu();
+        }
     });
 }
 
-// Fechar menu ao clicar em um link
-const links = document.querySelectorAll('.nav-links a');
-links.forEach(link => {
-    link.addEventListener('click', () => {
-        if (navLinks) navLinks.classList.remove('active');
-        if (hamburger) {
-            hamburger.classList.remove('active');
-            hamburger.setAttribute('aria-expanded', 'false');
-        }
-    });
-});
-
-// Fechar menu ao clicar fora
-document.addEventListener('click', (e) => {
-    if (navLinks && hamburger && 
-        !e.target.closest('.nav-container') && 
-        navLinks.classList.contains('active')) {
-        navLinks.classList.remove('active');
-        hamburger.classList.remove('active');
-        hamburger.setAttribute('aria-expanded', 'false');
-    }
-});
-
-// Script para o accordion de habilidades - INICIALMENTE FECHADAS
-document.addEventListener('DOMContentLoaded', function() {
-    const categoryHeaders = document.querySelectorAll('.category-header');
-    
-    categoryHeaders.forEach(header => {
-        header.addEventListener('click', function() {
-            const category = this.parentElement;
-            const isActive = category.classList.contains('active');
-            
-            // Fecha todas as outras categorias
-            document.querySelectorAll('.skill-category').forEach(otherCategory => {
-                if (otherCategory !== category) {
-                    otherCategory.classList.remove('active');
-                }
-            });
-            
-            // Alterna a categoria clicada
-            if (!isActive) {
-                category.classList.add('active');
-            } else {
-                category.classList.remove('active');
-            }
-        });
-    });
-});
-
-// Script para o accordion das colunas
-document.addEventListener('DOMContentLoaded', function() {
-    const columnHeaders = document.querySelectorAll('.column-header');
-    
-    columnHeaders.forEach(header => {
-        header.addEventListener('click', function() {
-            const column = this.parentElement;
-            const isActive = column.classList.contains('active');
-            
-            // Alterna a coluna clicada
-            if (!isActive) {
-                column.classList.add('active');
-            } else {
-                column.classList.remove('active');
-            }
-        });
-    });
-});
-
-// Script para o accordion de objetivos
-document.addEventListener('DOMContentLoaded', function() {
-    const objectiveHeaders = document.querySelectorAll('.objective-header');
-    
-    objectiveHeaders.forEach(header => {
-        header.addEventListener('click', function() {
-            const objectiveItem = this.parentElement;
-            const isActive = objectiveItem.classList.contains('active');
-            
-            // Fecha todos os outros itens
-            document.querySelectorAll('.objective-item').forEach(otherItem => {
-                if (otherItem !== objectiveItem) {
-                    otherItem.classList.remove('active');
-                }
-            });
-            
-            // Alterna o item clicado
-            if (!isActive) {
-                objectiveItem.classList.add('active');
-            } else {
-                objectiveItem.classList.remove('active');
-            }
-        });
-    });
-});
-
 // Smooth scroll para links internos
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        if (this.getAttribute('href') !== '#') {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            if (this.getAttribute('href') !== '#' && this.getAttribute('href') !== '#main-content') {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    // Usar scroll suave se suportado, caso contrário fallback
+                    if ('scrollBehavior' in document.documentElement.style) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    } else {
+                        target.scrollIntoView();
+                    }
+                }
             }
-        }
+        });
     });
-});
+}
 
 // Efeito de scroll no header
-window.addEventListener('scroll', debounce(() => {
+function initHeaderScroll() {
     const header = safeQuerySelector('header');
-    if (header) {
+    if (!header) return;
+    
+    window.addEventListener('scroll', debounce(() => {
         if (window.scrollY > 50) {
             header.style.background = 'rgba(30, 41, 59, 0.98)';
             header.style.backdropFilter = 'blur(10px)';
@@ -155,48 +164,55 @@ window.addEventListener('scroll', debounce(() => {
             header.style.background = 'var(--secondary-color)';
             header.style.backdropFilter = 'none';
         }
-    }
-}, 10));
+    }, 10));
+}
 
 // Atualizar navegação ativa
-function updateActiveNav() {
+function initActiveNav() {
     const sections = document.querySelectorAll('section');
     const navLinks = document.querySelectorAll('.nav-links a');
     
-    let current = '';
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
+    function updateActiveNav() {
+        let current = '';
         
-        if (scrollY >= (sectionTop - 150)) {
-            current = section.getAttribute('id');
-        }
-    });
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (scrollY >= (sectionTop - 150)) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    }
     
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-        }
-    });
+    window.addEventListener('scroll', debounce(updateActiveNav, 10));
+    updateActiveNav(); // Chamar inicialmente
 }
-
-// Chame a função no scroll
-window.addEventListener('scroll', debounce(updateActiveNav, 10));
 
 // Função para abrir email com opção de Gmail
 function abrirEmail() {
-    const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=jeffersonsouza.j30@gmail.com&su=Contato via Currículo&body=Olá Jefferson, vim através do seu currículo online.';
+    const email = 'jeffersonsouza.j30@gmail.com';
+    const subject = 'Contato via Currículo';
+    const body = 'Olá Jefferson, vim através do seu currículo online.';
+    
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${email}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     const gmailWindow = window.open(gmailUrl, '_blank');
     
+    // Fallback para mailto
     if (!gmailWindow || gmailWindow.closed || typeof gmailWindow.closed == 'undefined') {
-        window.open('mailto:jeffersonsouza.j30@gmail.com?subject=Contato via Currículo&body=Olá Jefferson, vim através do seu currículo online.');
+        window.open(`mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
     }
 }
 
 // Script para o scroll da seção de objetivos
-document.addEventListener('DOMContentLoaded', function() {
+function initTechStackScroll() {
     const scrollContainer = safeQuerySelector('.scrollable-tech-stack');
     const databaseSection = safeQuerySelector('.database-section');
     const scrollReached = safeQuerySelector('.scroll-reached');
@@ -214,10 +230,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     // Mostra o indicador de chegada
                     if (scrollReached) {
                         scrollReached.style.display = 'block';
+                        
+                        // Esconde após alguns segundos
+                        setTimeout(() => {
+                            scrollReached.style.display = 'none';
+                        }, 3000);
                     }
-                    
-                    // Esconde o indicador de scroll
-                    scrollContainer.classList.add('scrolled');
                 }
             });
         }, {
@@ -247,11 +265,28 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
     }
-});
+}
 
 // Inicialização quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
-    updateActiveNav();
+    // Adicionar skip link para acessibilidade
+    const skipLink = document.createElement('a');
+    skipLink.href = '#main-content';
+    skipLink.className = 'skip-link';
+    skipLink.textContent = 'Pular para o conteúdo principal';
+    document.body.insertBefore(skipLink, document.body.firstChild);
+    
+    // Inicializar todos os módulos
+    initMobileMenu();
+    initSmoothScroll();
+    initHeaderScroll();
+    initActiveNav();
+    initTechStackScroll();
+    
+    // Inicializar accordions
+    new Accordion('.skill-category');
+    new Accordion('.section-column');
+    new Accordion('.objective-item');
     
     // Adicionar event listeners para teclado nos itens de contato
     document.querySelectorAll('.contact-item').forEach(item => {
@@ -262,4 +297,30 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
+    
+    // Medir performance
+    if ('PerformanceObserver' in window) {
+        const observer = new PerformanceObserver((list) => {
+            list.getEntries().forEach(entry => {
+                console.log(`${entry.name}: ${entry.duration}ms`);
+            });
+        });
+        observer.observe({ entryTypes: ['measure', 'navigation'] });
+    }
+    
+    // Fallback para scroll suave
+    if (!CSS.supports('scroll-behavior', 'smooth')) {
+        console.log('Scroll suave não suportado, usando fallback');
+    }
 });
+
+// Track interactions (para analytics futuro)
+function trackInteraction(eventName, data = {}) {
+    if (typeof gtag !== 'undefined') {
+        gtag('event', eventName, data);
+    }
+    console.log(`Event tracked: ${eventName}`, data);
+}
+
+// Exportar funções para uso global (se necessário)
+window.trackInteraction = trackInteraction;
