@@ -1265,3 +1265,55 @@ a:focus, button:focus, .contact-item:focus {
 * {
     transform: translateZ(0);
 }
+/* Layout compacto em grid */
+.compact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.tech-column {
+    background: rgba(59, 130, 246, 0.1);
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+}
+
+.tech-column strong {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--primary-color);
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.tech-column ul {
+    padding-left: 10px;
+    margin: 0;
+}
+
+.tech-column li {
+    font-size: 0.65rem;
+    line-height: 1.2;
+    margin-bottom: 2px;
+}
+
+/* Responsividade para o grid compacto */
+@media (max-width: 768px) {
+    .compact-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .compact-grid {
+        grid-template-columns: 1fr;
+        gap: 6px;
+    }
+    
+    .tech-column {
+        padding: 6px;
+    }
+}
