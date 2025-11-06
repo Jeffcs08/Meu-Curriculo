@@ -175,28 +175,6 @@ section {
     transition: all 0.5s ease-in-out;
 }
 
-.close-btn {
-    position: absolute;
-    top: 0;
-    right: 20px;
-    background: none;
-    border: none;
-    font-size: 1.8rem;
-    color: var(--primary-color);
-    cursor: pointer;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-}
-
-.close-btn:hover {
-    background-color: var(--dark-color);
-    transform: scale(1.1);
-}
 
 /* Sobre */
 .about-content {
@@ -1299,13 +1277,6 @@ a:focus, button:focus, .contact-item:focus {
     margin-bottom: 2px;
 }
 
-/* Responsividade para o grid compacto */
-@media (max-width: 768px) {
-    .compact-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 8px;
-    }
-}
 
 @media (max-width: 480px) {
     .compact-grid {

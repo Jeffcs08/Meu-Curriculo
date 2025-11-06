@@ -27,35 +27,6 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Controle da seção Sobre
-const sobreLink = document.getElementById('sobre-link');
-const sobreSection = document.getElementById('sobre');
-const closeSobre = document.getElementById('close-sobre');
-
-// Mostrar seção Sobre ao clicar no link
-sobreLink.addEventListener('click', (e) => {
-    e.preventDefault();
-    
-    // Scroll suave para a seção
-    sobreSection.scrollIntoView({ 
-        behavior: 'smooth',
-        block: 'start'
-    });
-});
-
-// Fechar seção Sobre
-closeSobre.addEventListener('click', () => {
-    // Scroll para o topo ao fechar
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-});
-
-// Fechar seção Sobre ao clicar fora do conteúdo
-sobreSection.addEventListener('click', (e) => {
-    if (e.target === sobreSection) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-});
-
 // Script para o accordion de habilidades - INICIALMENTE FECHADAS
 document.addEventListener('DOMContentLoaded', function() {
     const categoryHeaders = document.querySelectorAll('.category-header');
@@ -196,13 +167,6 @@ function updateActiveNav() {
 // Chame a função no scroll
 window.addEventListener('scroll', debounce(updateActiveNav, 10));
 
-// Tecla ESC para fechar a seção Sobre
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-});
-
 // Função para abrir email com opção de Gmail
 function abrirEmail() {
     // Tenta abrir o Gmail diretamente
@@ -278,19 +242,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
-
-// Função para scroll automático até o banco de dados (opcional)
-function scrollToDatabase() {
-    const databaseSection = document.querySelector('.database-section');
-    const scrollContainer = document.querySelector('.scrollable-tech-stack');
-    
-    if (databaseSection && scrollContainer) {
-        databaseSection.scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'center'
-        });
-    }
-}
 
 // Inicialização quando o DOM estiver carregado
 document.addEventListener('DOMContentLoaded', function() {
