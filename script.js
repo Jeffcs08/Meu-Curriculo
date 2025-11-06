@@ -5,6 +5,7 @@ const navLinks = document.getElementById('navLinks');
 hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
     hamburger.classList.toggle('active');
+    hamburger.setAttribute('aria-expanded', hamburger.classList.contains('active'));
 });
 
 // Fechar menu ao clicar em um link
@@ -13,7 +14,17 @@ links.forEach(link => {
     link.addEventListener('click', () => {
         navLinks.classList.remove('active');
         hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
     });
+});
+
+// Fechar menu ao clicar fora
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.nav-container') && navLinks.classList.contains('active')) {
+        navLinks.classList.remove('active');
+        hamburger.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+    }
 });
 
 // Controle da seção Sobre
@@ -21,14 +32,9 @@ const sobreLink = document.getElementById('sobre-link');
 const sobreSection = document.getElementById('sobre');
 const closeSobre = document.getElementById('close-sobre');
 
-// Inicialmente oculta a seção Sobre
-sobreSection.classList.add('hidden-section');
-
 // Mostrar seção Sobre ao clicar no link
 sobreLink.addEventListener('click', (e) => {
     e.preventDefault();
-    sobreSection.classList.remove('hidden-section');
-    sobreSection.classList.add('visible-section');
     
     // Scroll suave para a seção
     sobreSection.scrollIntoView({ 
@@ -39,15 +45,14 @@ sobreLink.addEventListener('click', (e) => {
 
 // Fechar seção Sobre
 closeSobre.addEventListener('click', () => {
-    sobreSection.classList.remove('visible-section');
-    sobreSection.classList.add('hidden-section');
+    // Scroll para o topo ao fechar
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
 // Fechar seção Sobre ao clicar fora do conteúdo
 sobreSection.addEventListener('click', (e) => {
     if (e.target === sobreSection) {
-        sobreSection.classList.remove('visible-section');
-        sobreSection.classList.add('hidden-section');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 });
 
@@ -126,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         // Não aplicar para o link "Sobre" que tem funcionalidade especial
-        if (this.id !== 'sobre-link') {
+        if (this.getAttribute('href') !== '#') {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
             if (target) {
@@ -139,8 +144,21 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
+// Debounce para eventos de scroll
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
+}
+
 // Adicionar classe de scroll no header para efeito visual
-window.addEventListener('scroll', () => {
+window.addEventListener('scroll', debounce(() => {
     const header = document.querySelector('header');
     if (window.scrollY > 100) {
         header.style.background = 'rgba(30, 41, 59, 0.95)';
@@ -149,7 +167,7 @@ window.addEventListener('scroll', () => {
         header.style.background = 'var(--secondary-color)';
         header.style.backdropFilter = 'none';
     }
-});
+}, 10));
 
 // Atualizar navegação ativa
 function updateActiveNav() {
@@ -176,13 +194,12 @@ function updateActiveNav() {
 }
 
 // Chame a função no scroll
-window.addEventListener('scroll', updateActiveNav);
+window.addEventListener('scroll', debounce(updateActiveNav, 10));
 
 // Tecla ESC para fechar a seção Sobre
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && sobreSection.classList.contains('visible-section')) {
-        sobreSection.classList.remove('visible-section');
-        sobreSection.classList.add('hidden-section');
+    if (e.key === 'Escape') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 });
 
@@ -274,3 +291,18 @@ function scrollToDatabase() {
         });
     }
 }
+
+// Inicialização quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', function() {
+    updateActiveNav();
+    
+    // Adicionar event listeners para teclado nos itens de contato
+    document.querySelectorAll('.contact-item').forEach(item => {
+        item.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                item.click();
+            }
+        });
+    });
+});

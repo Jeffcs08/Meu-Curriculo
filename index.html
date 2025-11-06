@@ -8,30 +8,32 @@
 </head>
 <body>
     <!-- Cabeçalho e Navegação -->
-    <header>
+    <header role="banner">
         <div class="container nav-container">
             <a href="#" class="logo">J<span>S</span></a>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-            <ul class="nav-links" id="navLinks">
-                <li><a href="#" id="sobre-link">Sobre</a></li>
-                <li><a href="#habilidades">Habilidades</a></li>
-                <li><a href="#experiencia-formacao">Experiência & Formação</a></li>
-                <li><a href="#objetivos">Objetivos</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
+            <nav role="navigation" aria-label="Menu principal">
+                <button class="hamburger" id="hamburger" aria-label="Abrir menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="#" id="sobre-link">Sobre</a></li>
+                    <li><a href="#habilidades">Habilidades</a></li>
+                    <li><a href="#experiencia-formacao">Experiência & Formação</a></li>
+                    <li><a href="#objetivos">Objetivos</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <!-- Seção Sobre (inicialmente oculta) -->
-    <section id="sobre" class="hidden-section">
+    <!-- Seção Sobre -->
+    <section id="sobre">
         <div class="container">
             <div class="section-title">
                 <h2>Sobre Mim</h2>
-                <button class="close-btn" id="close-sobre">×</button>
+                <button class="close-btn" id="close-sobre" aria-label="Fechar seção sobre">×</button>
             </div>
             <div class="about-content">
                 <div class="about-text">
@@ -354,7 +356,7 @@
             </div>
             <div class="contact-container-centered">
                 <div class="contact-items-grid">
-                    <div class="contact-item clickable" onclick="window.open('https://wa.me/5511918686311', '_blank')">
+                    <div class="contact-item clickable" onclick="window.open('https://wa.me/5511918686311', '_blank')" tabindex="0" role="button">
                         <div class="contact-icon">📞</div>
                         <div class="contact-text">
                             <h3>WhatsApp</h3>
@@ -362,7 +364,7 @@
                         </div>
                     </div>
                     
-                    <div class="contact-item clickable" onclick="abrirEmail()">
+                    <div class="contact-item clickable" onclick="abrirEmail()" tabindex="0" role="button">
                         <div class="contact-icon">✉️</div>
                         <div class="contact-text">
                             <h3>E-mail</h3>
@@ -370,7 +372,7 @@
                         </div>
                     </div>
                     
-                    <div class="contact-item clickable" onclick="window.open('https://www.linkedin.com/in/jefferson-souza-28106523a/', '_blank')">
+                    <div class="contact-item clickable" onclick="window.open('https://www.linkedin.com/in/jefferson-souza-28106523a/', '_blank')" tabindex="0" role="button">
                         <div class="contact-icon">💼</div>
                         <div class="contact-text">
                             <h3>LinkedIn</h3>
@@ -378,7 +380,7 @@
                         </div>
                     </div>
                     
-                    <div class="contact-item clickable" onclick="window.open('https://github.com/Jeffcs08?tab=repositories', '_blank')">
+                    <div class="contact-item clickable" onclick="window.open('https://github.com/Jeffcs08?tab=repositories', '_blank')" tabindex="0" role="button">
                         <div class="contact-icon">🐙</div>
                         <div class="contact-text">
                             <h3>GitHub</h3>
